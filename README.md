@@ -9,6 +9,7 @@ Installation:
 3. install requirements
     * pip install -Ur requirements.txt
 4. Add your Digital Ocean secret key as an environment variable
+    * export DIGITAL_OCEAN_KEY="<secret-key>"
 5. You may also need to install/configure the AWS CLI 
     * http://docs.aws.amazon.com/cli/latest/userguide/installing.html
 
