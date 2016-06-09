@@ -78,11 +78,11 @@ def r53_to_do(domain, aws_profile):
         print(response)
     else:
         print('Looks like the domain already exists, go delete it manually then continue')
-        # return
+        return
 
     # TODO: Review how this part works
     for record in record_sets:
-        if record['Type'] not in ['A', 'CNAME', 'MX', 'TXT']:
+        if record['Type'] not in ['A', 'CNAME', 'MX', 'TXT', 'SPF']:
             print(record['Type'], "is not a supported DNS record type")
             continue
         for resource in record['ResourceRecords']:
@@ -104,6 +104,10 @@ def r53_to_do(domain, aws_profile):
             # This snippet isn't full proof
             if record['Type'] in ['A'] and '\\' in record['Name']:
                 record['Name'] = record['Name'].decode('string_escape')
+
+            # Digital ocean uses TXT types for all SPF enteries
+            if record['Type'] in ['SPF']:
+                record['Type'] = 'TXT'
 
             request_data['type'] = record['Type']
             request_data['name'] = record['Name'][:-1]
