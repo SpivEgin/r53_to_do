@@ -1,0 +1,4 @@
+# script package requirements
+boto3
+click
+requests
