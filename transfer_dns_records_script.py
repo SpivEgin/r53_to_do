@@ -102,11 +102,11 @@ def r53_to_do(domain, aws_profile):
 
             # This code snipet deals with escaping strings (eg. converting \\052 into *)
             # This snippet isn't full proof
-            if record['Type'] in ['A'] and '\\' in record['Name']:
+            if record['Type'] == 'A' and '\\' in record['Name']:
                 record['Name'] = record['Name'].decode('string_escape')
 
             # Digital ocean uses TXT types for all SPF enteries
-            if record['Type'] in ['SPF']:
+            if record['Type'] == 'SPF':
                 record['Type'] = 'TXT'
 
             request_data['type'] = record['Type']
